@@ -25,6 +25,7 @@ public class SignupPage {
 	
 	@FindBy(xpath="//a[@id='login-btn']")
 	private WebElement loginButton;
+	//a[text()='Sign up']
 	
 	public void userName(String userName) {
 		username.sendKeys(userName);
