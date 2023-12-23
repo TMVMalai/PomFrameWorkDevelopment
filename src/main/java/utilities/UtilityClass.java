@@ -21,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Utility {
+public class UtilityClass {
 	public static WebDriver driver;
 	public Properties prop;
 	// develop a functionality for browser selection
@@ -30,8 +30,7 @@ public class Utility {
 		// use the properties from data.properties
 		prop = new Properties();
 		// path to property
-		String propath = System.getProperty("user.dir")
-				+ "/Users/thirumalaivasanperumal/eclipse-workspace/PomFrameWorkDevelopment/src/main/java/resources/Data.properties";
+		String propath = System.getProperty("user.dir") + "/src/main/java/resources/Data.properties";
 		FileInputStream fis = new FileInputStream(propath);
 		prop.load(fis);
 		String browserchoice = prop.getProperty("browser");
@@ -48,11 +47,12 @@ public class Utility {
 			System.out.println("Invalid Browser Selection");
 			System.exit(1);
 		}
+		driver.get(prop.getProperty("url"));
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-		return null;
+		 return driver;
 
 	}
 
@@ -79,6 +79,10 @@ public class Utility {
 	public static WebElement waitforElementTobeClickable(By locator, int timeoutSeconds) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
 		return wait.until(ExpectedConditions.elementToBeClickable(locator));
+	}
+	public void click(WebElement element , String elementName) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
 }
